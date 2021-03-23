@@ -30,9 +30,6 @@ namespace Rulomi {
 		//Vertex Array
 		glGenVertexArrays(1, &m_VertexArray);
 		glBindVertexArray(m_VertexArray);
-		//Vertex Buffer  ABS
-		//glGenBuffers(1, &m_VertexBuffer);
-		//glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 		float  vertices[3 * 3] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
@@ -40,16 +37,13 @@ namespace Rulomi {
 		}; 
 		// 创建一个跨平台的 VertexBuffer
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+
+		//buffer layout abstuction
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 		
-
-
 		unsigned int indices[3] = {  0,1,2 };
-		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, 3) );
-
-
 		std::string vertexSouce = R"(
                      #version 330 core
 					 layout(location = 0) in vec3 a_Position;
@@ -142,7 +136,7 @@ namespace Rulomi {
 
 			m_Shader->Bind();
 			glBindVertexArray(m_VertexArray);
-			//再绑定VAB 后与他同时绑定的IB 也会被自动绑定
+			//再绑定VAB 后与他同时绑定的IB也会被自动绑定
 			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			m_ImGuiLayer->Begin();

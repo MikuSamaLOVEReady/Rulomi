@@ -1,0 +1,14 @@
+#pragma once
+
+#define RLM_MOUSE_BUTTON_1         0
+#define RLM_MOUSE_BUTTON_2         1
+#define RLM_MOUSE_BUTTON_3         2
+#define RLM_MOUSE_BUTTON_4         3
+#define RLM_MOUSE_BUTTON_5         4
+#define RLM_MOUSE_BUTTON_6         5
+#define RLM_MOUSE_BUTTON_7         6
+#define RLM_MOUSE_BUTTON_8         7
+#define RLM_MOUSE_BUTTON_LAST      RLM_MOUSE_BUTTON_8
+#define RLM_MOUSE_BUTTON_LEFT      RLM_MOUSE_BUTTON_1
+#define RLM_MOUSE_BUTTON_RIGHT     RLM_MOUSE_BUTTON_2
+#define RLM_MOUSE_BUTTON_MIDDLE    RLM_MOUSE_BUTTON_3

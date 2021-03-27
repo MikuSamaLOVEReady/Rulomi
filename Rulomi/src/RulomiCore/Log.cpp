@@ -17,7 +17,6 @@ namespace Rulomi {
 	   // spdlog::set_level(spdlog::level::debug); 
 	    // Set global log level to debug  如果直接调用库里的函数设置 
 		s_CoreLogger->set_level(spdlog::level::trace);
-
 		s_ClientLogger = spdlog::stdout_color_mt("Game");
 		s_ClientLogger->set_level(spdlog::level::trace);
 

@@ -4,6 +4,7 @@
 
 namespace Rulomi {
 
+	//窗口时间响应
 	class RULOMI_API WindowResizeEvent : public Event
 	{
 	public:
@@ -27,7 +28,6 @@ namespace Rulomi {
 		unsigned int m_width, m_height;
 	};
 
-
 	class RULOMI_API WindowCloseEvent : public Event
 	{
 	public:
@@ -46,7 +46,7 @@ namespace Rulomi {
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-
+	//这个event 是负责干啥的？ 目前还没用
 	class RULOMI_API AppUpdateEvent : public Event
 	{
 	public:

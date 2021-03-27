@@ -4,8 +4,22 @@
 
 namespace Rulomi {
 
-	//目前只以后在这设定 所选用的接口
-	RendererAPI Renderer::s_RendererAPI = RendererAPI::OpenGL;
+	void Renderer::BeginScene()
+	{
 
+	}
+
+	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
+	{
+		//这里就是 renderer 与 render command 链接的地方
+		vertexArray->Bind();
+		RenderCommand::DrawVertexs(vertexArray);
+
+	}
+
+	void Renderer::EndScene()
+	{
+
+	}
 
 }

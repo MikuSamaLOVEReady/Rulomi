@@ -19,13 +19,12 @@ namespace Rulomi {
 
 		//静态函数~ 存放日志系统的初始化
 		static void Init();
-
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
 
 	private:
-		//这只是申明了 两个静态变量 （那么他俩的是什么时候定义呢？）
+		//这只是申明了 两个静态变量 （cpp中定义）
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
 

@@ -99,7 +99,7 @@ namespace Rulomi {
 	};
 
 
-	//重载一个 << 为Log系统服务  Log
+	//重载一个 << 为Log系统服务  Log  这是一个非成员函数 (没有默认对象this, 所以要给出)
 	inline std::ostream& operator << (std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();

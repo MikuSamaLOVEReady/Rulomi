@@ -9,6 +9,7 @@
 #include "RulomiCore/ImGui/ImGuiLayer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
+#include "Renderer/VertexArray.h"
 
 
 
@@ -36,7 +37,7 @@ namespace Rulomi {
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-		//这个unique window是指向当前选中 window的指针
+		//这个unique window是指向当前选中 window的指针  但整个window 可能不是由GLFW实现的可能混杂别的类型
 		std::unique_ptr<Window> m_Window;
 
 
@@ -44,10 +45,10 @@ namespace Rulomi {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	      
-		unsigned int m_VertexArray;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<VertexArray> m_VertexArray;
 		static Application* s_Instance;
 
 		

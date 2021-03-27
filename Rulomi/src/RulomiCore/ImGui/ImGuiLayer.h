@@ -14,7 +14,7 @@ namespace Rulomi {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		//这个地方是 重写Layer里面的东西，但是没有加override，应该加上
+		//这个地方是 重写Layer里面的东西
 		virtual void OnAttach() override ;
 		virtual void OnDetach() override;
 		virtual void OnImGuiRender() override;

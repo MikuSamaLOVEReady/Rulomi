@@ -18,6 +18,7 @@ IncludeDir["GLFW"] = "Rulomi/vendor/GLFW/include"
 IncludeDir["GLAD"] = "Rulomi/vendor/GLAD/include"
 IncludeDir["ImGui"] = "Rulomi/vendor/imgui"
 IncludeDir["glm"] = "Rulomi/vendor/glm"
+IncludeDir["stb_image"] = "Rulomi/vendor/stb_image"
 
 
 
@@ -44,6 +45,8 @@ project "Rulomi"
          {
                   "%{prj.name}/src/**.h",
                   "%{prj.name}/src/**.cpp",
+                  "%{prj.name}/vendor/stb_image/**.h",
+		          "%{prj.name}/vendor/stb_image/**.cpp",
                   "%{prj.name}/vendor/glm/glm/**.hpp",
                   "%{prj.name}/vendor/glm/glm/**.inl"
 		 }
@@ -61,6 +64,7 @@ project "Rulomi"
                   "%{IncludeDir.GLFW}",
                   "%{IncludeDir.GLAD}",
                   "%{IncludeDir.ImGui}",
+                  "%{IncludeDir.stb_image}",
                   "%{IncludeDir.glm}"
 		 }
 

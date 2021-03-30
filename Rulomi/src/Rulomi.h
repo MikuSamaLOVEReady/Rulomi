@@ -15,6 +15,16 @@
 //-------------------- Logging system--------------------//
 #include"RulomiCore/Log.h"
 
+//-------------------- Rendering system--------------------//
+#include "Renderer/Renderer.h"
+#include "Renderer/RenderCommand.h"
+#include "Renderer/Shader.h"
+#include "Renderer/Buffer.h"
+#include "Renderer/OrthographicCamera.h"
+#include "Renderer/VertexArray.h"
+#include "Renderer/Texture.h"
+
+
 //-------------------- Entry Point------------------//
 #include"RulomiCore/EntryPoint.h"
 

@@ -1,5 +1,56 @@
 #pragma once
 
+#define RLM_KEY_SPACE              32
+#define RLM_KEY_APOSTROPHE         39  /* ' */
+#define RLM_KEY_COMMA              44  /* , */
+#define RLM_KEY_MINUS              45  /* - */
+#define RLM_KEY_PERIOD             46  /* . */
+#define RLM_KEY_SLASH              47  /* / */
+#define RLM_KEY_0                  48
+#define RLM_KEY_1                  49
+#define RLM_KEY_2                  50
+#define RLM_KEY_3                  51
+#define RLM_KEY_4                  52
+#define RLM_KEY_5                  53
+#define RLM_KEY_6                  54
+#define RLM_KEY_7                  55
+#define RLM_KEY_8                  56
+#define RLM_KEY_9                  57
+#define RLM_KEY_SEMICOLON          59  /* ; */
+#define RLM_KEY_EQUAL              61  /* = */
+#define RLM_KEY_A                  65
+#define RLM_KEY_B                  66
+#define RLM_KEY_C                  67
+#define RLM_KEY_D                  68
+#define RLM_KEY_E                  69
+#define RLM_KEY_F                  70
+#define RLM_KEY_G                  71
+#define RLM_KEY_H                  72
+#define RLM_KEY_I                  73
+#define RLM_KEY_J                  74
+#define RLM_KEY_K                  75
+#define RLM_KEY_L                  76
+#define RLM_KEY_M                  77
+#define RLM_KEY_N                  78
+#define RLM_KEY_O                  79
+#define RLM_KEY_P                  80
+#define RLM_KEY_Q                  81
+#define RLM_KEY_R                  82
+#define RLM_KEY_S                  83
+#define RLM_KEY_T                  84
+#define RLM_KEY_U                  85
+#define RLM_KEY_V                  86
+#define RLM_KEY_W                  87
+#define RLM_KEY_X                  88
+#define RLM_KEY_Y                  89
+#define RLM_KEY_Z                  90
+#define RLM_KEY_LEFT_BRACKET       91  /* [ */
+#define RLM_KEY_BACKSLASH          92  /* \ */
+#define RLM_KEY_RIGHT_BRACKET      93  /* ] */
+#define RLM_KEY_GRAVE_ACCENT       96  /* ` */
+#define RLM_KEY_WORLD_1            161 /* non-US #1 */
+#define RLM_KEY_WORLD_2            162 /* non-US #2 */
+
 #define RLM_KEY_ESCAPE             256
 #define RLM_KEY_ENTER              257
 #define RLM_KEY_TAB                258

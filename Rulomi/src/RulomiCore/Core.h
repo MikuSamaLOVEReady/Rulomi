@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <memory>
 #ifdef RLM_DYNAMIC_LINK
                 #ifdef RLM_PLATFORM_WINDOWS
                               #ifdef RLM_BUILD_DLL
@@ -41,3 +42,13 @@
 #define HZ_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) 
 
 
+namespace Rulomi {
+
+    template <typename T>
+    using Reference = std::shared_ptr<T>;
+
+    template <typename T>
+    using Scope = std::unique_ptr<T>;
+
+
+}

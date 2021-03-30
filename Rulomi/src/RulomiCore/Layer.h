@@ -2,7 +2,7 @@
 
 #include "Core.h"
 #include "Events/Event.h"
-
+#include "Core/Timeinternal.h"
 namespace Rulomi {
 
 	class RULOMI_API Layer
@@ -14,7 +14,8 @@ namespace Rulomi {
 		//一般虚函数 默认没效果。
 		virtual void OnAttach() {};
 		virtual void OnDetach() {};
-		virtual void OnUpdate() {};
+		//virtual void OnUpdate() {};
+		virtual void OnUpdate(TimeInterval ts) {}
 		virtual void OnImGuiRender() {};
 		//layer 的事件处理
 		virtual void OnEvent(Event& event) {};

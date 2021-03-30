@@ -4,9 +4,11 @@
 
 #include "Log.h"
 
-
 #include "Renderer/Renderer.h"
 #include "Input.h"
+
+#include <GLFW/glfw3.h>
+
 
 namespace Rulomi {
 
@@ -16,6 +18,7 @@ namespace Rulomi {
 
 	//初始化整个引擎
 	Application::Application()
+	
 	{
 		//RLM_ASSERT(!s_Instance, "Can only has one app");
 		s_Instance = this;
@@ -28,75 +31,7 @@ namespace Rulomi {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		//Vertex Array （ABS)
-		//glGenVertexArrays(1, &m_VertexArray);
-		//glBindVertexArray(m_VertexArray);
-
-		m_VertexArray.reset(VertexArray::Create());
-
-		float  vertices[3 * 7] = {
-		    -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
-		}; 
-		// 创建一个跨平台的 VertexBuffer crete中自动判定
-		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-
-	    //在创建buffer layout的时候 就确定 offset 和 layout
-	    BufferLayout layout = {
-	    	{ ShaderDataType::Float3, "a_Position" },
-	    	{ ShaderDataType::Float4, "a_Color" }
-	    };
-	    //每个VB 只能同时含有一个 layout
-	    m_VertexBuffer->SetLayout(layout);
-		//需要根据layout设置 shader属性
-		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
-
-		//buffer layout abstuction
-		//glEnableVertexAttribArray(0);
-		//第一个参数是激活第几个属性ID 
-		//第二个参数是这个属性由几个数组成 
-		//第三个 这几个数字的类型
-		//第四个 normalized 是否开启
-		//第五个 stride 表示 每个顶点的总容量大小 （eg 位置坐标3个float 颜色4个float 纹理 3个float 一共10个） 
-		// stride 表示将指针向后移动多少个 bytes才能读取下一套数据
-		//第五个表示offset 当stride过后，现在这个指针需要向后移动多少个单位才能读取到下一套属性。
-		//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-		
-		unsigned int indices[3] = {  0,1,2 };
-		m_IndexBuffer.reset(IndexBuffer::Create(indices, 3) );
-		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
-
-
-		std::string vertexSouce = R"(
-                     #version 330 core
-					 layout(location = 0) in vec3 a_Position;
-					 layout(location = 1) in vec4 a_Color;
-
-					 out vec3 v_Position;
-					 out vec4 v_Color;
-
-					void main()
-					{
-					        v_Position = a_Position;
-							v_Color = a_Color;
-							gl_Position = vec4(a_Position,1.0);
-					}
-              )";
-
-		std::string fragmentSouce = R"(
-                     #version 330 core
-					 layout(location = 0) out vec4 a_Color;
-					 in vec3 v_Position;
-					 in vec4 v_Color;
-					void main()
-					{
-							a_Color = vec4(v_Position,1.0 );
-							a_Color = v_Color;
-					}
-              )";
-
-		m_Shader.reset(new Shader(vertexSouce, fragmentSouce));
+	
 
 	}
 
@@ -109,7 +44,7 @@ namespace Rulomi {
 		//构造的时候 m_Event 类型也被初始化
 		EventDispatcher dispatcher(e);
 		// 这里判断 发出的事件类型是否 与 .Dispatch<T> 中T（我们想要检测的类型一致）
-		dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
+		dispatcher.Dispatch<WindowCloseEvent>( std::bind(&Application::OnWindowClose, this, std::placeholders::_1) );
 		RLM_CORE_INFO("{0}", e);
 
 
@@ -159,31 +94,13 @@ namespace Rulomi {
 		
 		while (m_Running)
 		{
-			/*glClearColor((double)72/255, (double)209/255, (double)204/255, 1);*/
-			//glClearColor( 0.1f , 0.1f , 0.1f , 1);
-			//glClear(GL_COLOR_BUFFER_BIT);
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			RenderCommand::Clear();
+			//time interval 
+			float Currenttime = (float)glfwGetTime();
+			TimeInterval timeInterval = Currenttime - m_LastFrameTime;
+			m_LastFrameTime = Currenttime;
 
-			//渲染器全抽象
-			//详见 Render class设计
-			Renderer::BeginScene();
-
-			//绘制
-			m_Shader->Bind();
-			Renderer::Submit(m_VertexArray);
-
-			//可以绑定多套shader 和 VA
-
-
-			//
-			Renderer::EndScene();
-
-			 
-			//m_Shader->Bind();
-			//m_VertexArray->Bind();
-			//glBindVertexArray(m_VertexArray);
-			//glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate(timeInterval);
 
 			m_ImGuiLayer->Begin();
 			//遍历所有layers 并且刷新

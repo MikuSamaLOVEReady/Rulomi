@@ -5,8 +5,6 @@
 
 namespace Rulomi {
 
-
-
 	VertexArray* VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())

@@ -3,6 +3,7 @@
 
 #include "imgui.h"
 //#include "Platform/OpenGL/imgui_OpenGLRenderer.h"
+//直接包含全部 实现和 输入字符匹配
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 

@@ -1,13 +1,9 @@
 #pragma once
-
 #include"RulomiPch.h"
 #include "RulomiCore/Core.h"
 
-
-
 namespace Rulomi {
 
-	//
 	enum class EventType
 	{
 		None = 0,
@@ -19,7 +15,6 @@ namespace Rulomi {
 
 
 	//这里用 bit表示的话每个种类 只占用一位 可以mask xor？这种按位操作
-	//这个地方就不是class wtf？ 这俩有区别么
 	enum EventCategory
 	{
 		None = 0,
@@ -72,10 +67,10 @@ namespace Rulomi {
 		{
 
 		}
-
 		//Dispatch 自身是一个模板函数 需要指定类型，但
 		// func 是处理此类event的函数，并且返回值是 bool
 		//参数 func指向 ’处理函数‘
+		//EventFn<T> func std::bind(&fn, this, std::placeholders::_1) 
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
@@ -91,11 +86,9 @@ namespace Rulomi {
 			}
 			return false;
 		}
-
 	private:
 		//这个是个引用 声明
 		Event& m_Event;
-
 	};
 
 

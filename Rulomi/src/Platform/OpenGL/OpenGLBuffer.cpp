@@ -8,6 +8,22 @@ namespace Rulomi {
 	////////////////VertexBuffer///////////////////////
 	/////////////////////////////////////////////////////
 
+	//只在GPU上开辟了空间，并没有具体数据
+	OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
+	{
+
+		glCreateBuffers(1, &m_RendererID);
+		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+	}
+
+	/*void OpenGLVertexBuffer::SetData(const void* data, uint32_t size)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+	}*/
+
+	
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, size_t size)
 	{
 		glCreateBuffers(1,&m_RendererID);   //二合一 //Vertex Array glGenVertexArrays(1, &m_VertexArray); 	glBindVertexArray(m_VertexArray);
@@ -16,6 +32,8 @@ namespace Rulomi {
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 
 	}
+
+	
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
 	{
@@ -31,6 +49,12 @@ namespace Rulomi {
 	void OpenGLVertexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void OpenGLVertexBuffer::SetData(const void* data, uint32_t size)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 
 

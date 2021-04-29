@@ -25,8 +25,17 @@
     <Filter Include="src\RulomiCore\ImGui">
       <UniqueIdentifier>{A791A239-9320-2C03-3C3F-40FE28AD3CA9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\RulomiCore\PlatformUtil">
+      <UniqueIdentifier>{CF6B54AB-3B79-8291-C45F-7E7C306C4E48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\RulomiCore\Scene">
+      <UniqueIdentifier>{9A89523A-8618-DC03-2F37-F0FE1BA5ECA9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\ImGuizmo">
+      <UniqueIdentifier>{73BF7F4C-DF4A-ED10-E85B-700554664911}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor\glm">
       <UniqueIdentifier>{829FC5A8-6E57-07F6-D75E-E051C335A2E6}</UniqueIdentifier>
@@ -57,6 +66,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -69,13 +81,16 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\WindowsInput.h">
-      <Filter>src\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\WindowsWindow.h">
       <Filter>src\Platform</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\Buffer.h">
+      <Filter>src\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Camera.h">
+      <Filter>src\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Framebuffer.h">
       <Filter>src\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\GraphicsContext.h">
@@ -88,6 +103,9 @@
       <Filter>src\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\Renderer.h">
+      <Filter>src\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Renderer2D.h">
       <Filter>src\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\RendererAPI.h">
@@ -150,11 +168,38 @@
     <ClInclude Include="src\RulomiCore\MouseButtonKeycode.h">
       <Filter>src\RulomiCore</Filter>
     </ClInclude>
+    <ClInclude Include="src\RulomiCore\OrthographicCameraController.h">
+      <Filter>src\RulomiCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RulomiCore\PlatformUtil\Utils.h">
+      <Filter>src\RulomiCore\PlatformUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RulomiCore\Scene\Components.h">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RulomiCore\Scene\Entity.h">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RulomiCore\Scene\Scene.h">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RulomiCore\Scene\SceneCamera.h">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RulomiCore\Scene\SceneSerializar.h">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RulomiCore\Scene\ScriptableEntity.h">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\RulomiCore\Window.h">
       <Filter>src\RulomiCore</Filter>
     </ClInclude>
     <ClInclude Include="src\RulomiPch.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\ImGuizmo\ImGuizmo.h">
+      <Filter>vendor\ImGuizmo</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\glm\common.hpp">
       <Filter>vendor\glm\glm</Filter>
@@ -1245,12 +1290,17 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\RulomiCore\MathEX\Math.h" />
+    <ClInclude Include="src\Renderer\EditorCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1268,10 +1318,19 @@
     <ClCompile Include="src\Platform\WindowsInput.cpp">
       <Filter>src\Platform</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\WindowsUtils.cpp">
+      <Filter>src\Platform</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\WindowsWindow.cpp">
       <Filter>src\Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\Buffer.cpp">
+      <Filter>src\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Camera.cpp">
+      <Filter>src\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Framebuffer.cpp">
       <Filter>src\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\OrthographicCamera.cpp">
@@ -1281,6 +1340,9 @@
       <Filter>src\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\Renderer.cpp">
+      <Filter>src\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Renderer2D.cpp">
       <Filter>src\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\RendererAPI.cpp">
@@ -1313,11 +1375,34 @@
     <ClCompile Include="src\RulomiCore\Log.cpp">
       <Filter>src\RulomiCore</Filter>
     </ClCompile>
+    <ClCompile Include="src\RulomiCore\OrthographicCameraController.cpp">
+      <Filter>src\RulomiCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RulomiCore\Scene\Components.cpp">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RulomiCore\Scene\Entity.cpp">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RulomiCore\Scene\Scene.cpp">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RulomiCore\Scene\SceneCamera.cpp">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RulomiCore\Scene\SceneSerializar.cpp">
+      <Filter>src\RulomiCore\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\RulomiPch.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\ImGuizmo\ImGuizmo.cpp">
+      <Filter>vendor\ImGuizmo</Filter>
     </ClCompile>
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\RulomiCore\MathEX\Math.cpp" />
+    <ClCompile Include="src\Renderer\EditorCamera.cpp" />
   </ItemGroup>
 </Project>

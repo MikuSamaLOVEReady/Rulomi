@@ -23,7 +23,7 @@
 
 
 #ifdef RLM_ENABLE_ASSERTS
-        #define RLM_ASSERT(x, ...) {  if(  !(x)  )  {    RLM_ERROR( "Assertion Failed: {0}", __VA_ARGS__);__debugbreak();  }}   
+        #define RLM_ASSERT(x, ...) {  if(  !(x)  )  {    RLM_Client_ERROR( "Assertion Failed: {0}", __VA_ARGS__);__debugbreak();  }}   
         #define RLM_CORE_ASSERT(x, ...){ if(!(x)) { RLM_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else 
         #define RLM_ASSERT(x, ...) 
@@ -39,7 +39,7 @@
 
 
 // Imgui layer event响应事件
-#define HZ_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) 
+#define RLM_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) 
 
 
 namespace Rulomi {
@@ -47,8 +47,22 @@ namespace Rulomi {
     template <typename T>
     using Reference = std::shared_ptr<T>;
 
+    template <typename T, typename...Args>
+    //constexpr 可以在编译时计算其返回值的函数。
+    constexpr Reference<T> CreateRef(Args&& ... args)
+    {
+        return std::make_shared<T>(std::forward<Args>(args)...);
+    }
+
     template <typename T>
     using Scope = std::unique_ptr<T>;
+    template <typename T, typename...Args>
+    constexpr Scope<T> CreateScope(Args&& ... args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
+   
+
 
 
 }

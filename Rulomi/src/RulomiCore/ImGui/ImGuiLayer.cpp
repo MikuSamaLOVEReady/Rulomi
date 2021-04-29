@@ -14,6 +14,8 @@
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
 
+#include"ImGuizmo.h"
+
 namespace Rulomi {
 
 	ImGuiLayer::ImGuiLayer()
@@ -51,6 +53,8 @@ namespace Rulomi {
 			style.WindowRounding = 0.0f;
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
+
+		//SetDarkThemeColors(); 可通过这个设置imgui组件细节颜色
 
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
@@ -92,6 +96,8 @@ namespace Rulomi {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+		ImGuizmo::BeginFrame();
+
 	}
 
 	void ImGuiLayer::OnImGuiRender()
@@ -100,6 +106,21 @@ namespace Rulomi {
 		ImGui::ShowDemoWindow(&show);
 	}
 
+	//imgui 层blocking event
+	void ImGuiLayer::OnEvent(Event& event)
+	{
+		//这里会默认操作 完imgui的动作之后选择 是否把这个事件标志为handled
+		if (m_BlockEvents) 
+		{
+			//选择将 鼠标和键盘 全部阻塞
+			//WantCaptureMouse 表示 imgui想要使用 鼠标事件
+			ImGuiIO& io = ImGui::GetIO();
+			//IMGUI 想要处理 X事件 且该事件 是同一类型 则不向下 传递
+			event.Handled |= event.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+			event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+		}
+		
+	}
 
 
 	void ImGuiLayer::End() 

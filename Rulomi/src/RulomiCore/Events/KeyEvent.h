@@ -38,6 +38,7 @@ namespace Rulomi {
 		{
 			std::stringstream ss;
 			ss << "keyPressedEvent: " << m_KeyCode;
+			ss << "keyPressedRepeat " << m_RepeatCount;
 			return ss.str();
 		}
 

@@ -31,7 +31,6 @@ namespace Rulomi {
 		return 0;
 	}
 
-
 	//每种 顶点属性 的 详细信息 
 	struct BufferElement  
 	{
@@ -41,18 +40,14 @@ namespace Rulomi {
 		uint32_t Offset;         //计算该属性 在顶点总属性长度中的起始位置
 		bool Normalized;
 
-
 		//默认构造函数 
 		//BufferElement() {}
-
-		//有点
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
 			: Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
 		{
 		}
 
 		//获取 数组中元素的个数。 与计算数据所占bytes容量不同
-		//
 		uint32_t GetComponentCount() const
 		{
 			switch (Type)
@@ -132,6 +127,9 @@ namespace Rulomi {
 
 		//size_t == unsigned long long 
 		static VertexBuffer* Create(float* vertices, size_t sizes);
+		//只提供容量。切记补Setdata
+		static Reference<VertexBuffer> Create(uint32_t size);
+		virtual void SetData(const void* data, uint32_t size) = 0;
 
 	};
 
@@ -147,7 +145,7 @@ namespace Rulomi {
 		virtual uint32_t GetCount() const = 0;
 		//size_t == unsigned long long 
 		// uint32_t == unsigned int 
-		static IndexBuffer* Create(uint32_t* vertices, uint32_t sizes);
+		static Reference<IndexBuffer>  Create(uint32_t* vertices, uint32_t sizes);
 	};
 
 

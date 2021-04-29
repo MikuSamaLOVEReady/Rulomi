@@ -11,14 +11,14 @@ namespace Rulomi {
 	struct WindowProps
 	{
 		std::string Title;
-		unsigned int Width;
-		unsigned int Height;
+		uint32_t Width;
+		uint32_t Height;
 
 		//struct 也可被当成一个 class 默认初始化
 	   // 默认窗体大小
 		WindowProps(const std::string& title = "Rulomi Engine",
-			unsigned int width = 1280,
-			unsigned int height = 720)
+			uint32_t width = 1280,
+			uint32_t height = 720)
 			:Title(title), Width(width), Height(height)
 		{}
    };

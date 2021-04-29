@@ -1,0 +1,17 @@
+#pragma once
+
+#include <glm/glm.hpp>
+
+
+namespace Rulomi {
+
+	namespace Math {
+
+		//Ω‚Œˆæÿ’Û
+		bool DecomposeTransform(const glm::mat4& transform, glm::vec3& translation, glm::vec3& rotation, glm::vec3& scale);
+	}
+
+
+
+
+}

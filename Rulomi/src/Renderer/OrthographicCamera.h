@@ -2,7 +2,6 @@
 
 #include <glm/glm.hpp>
 
-
 namespace Rulomi {
 
 	class OrthographicCamera
@@ -25,6 +24,9 @@ namespace Rulomi {
 			m_Rotation = rotation;
 			RecalculateMatrix();
 		}
+
+		void SetProjection(float left, float right, float bottom, float top);
+
 		float GetRotation() const { return m_Rotation; }
 
 		//相机的位置和角度决定 view matirx

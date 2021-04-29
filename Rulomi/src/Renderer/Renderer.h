@@ -6,6 +6,7 @@
 #include "RenderCommand.h"
 
 #include "OrthographicCamera.h"
+#include "Camera.h"
 #include "Shader.h"
 
 namespace Rulomi {
@@ -14,7 +15,10 @@ namespace Rulomi {
 	class Renderer
 	{
 	public:
+		static void Init();
+
 		static void BeginScene(OrthographicCamera& camera);
+		static void BeginScene(Camera& camera, glm::mat4& transform);
 		//submit 需要知道当前绑定哪个shader 
 		static void Submit(const std::shared_ptr<Shader>& shader,
 			const std::shared_ptr<VertexArray>& vertexArray, 

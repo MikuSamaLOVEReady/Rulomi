@@ -1,5 +1,5 @@
 #include "RulomiPch.h"
-#include "WindowsInput.h"
+#include "RulomiCore/Input.h"
 
 //按键响应由glfw提供
 #include <GLFW/glfw3.h>
@@ -13,10 +13,10 @@ namespace Rulomi {
 	//向上转型 upcast 动态绑定
 	//指针调用？
 	//全局静态变量必须要有定义 不然报错~！
-   Input* Input::s_Instance = new WindowsInput();
+   //Input* Input::s_Instance = new WindowsInput();
 
 
-	bool WindowsInput::IsKeyPressedImpl(int keycode)
+	bool Input::IsKeyPressed(int keycode)
 	{
 		//void 指针和具体类型指针之间的转换，例如void *转int *、char *转void *等；
 		GLFWwindow* cur_window = static_cast<GLFWwindow*> ( Application::Get().GetWindow().GetNativeWindow() );
@@ -26,14 +26,14 @@ namespace Rulomi {
 		return state == GLFW_PRESS || state== GLFW_REPEAT;
 	}
 
-	bool WindowsInput::IsMouseButtonPressedImpliment(int button)
+	bool Input::IsMouseButtonPressed(int button)
 	{
 		GLFWwindow* cur_window = static_cast<GLFWwindow*> (Application::Get().GetWindow().GetNativeWindow());
 		int state = glfwGetMouseButton(cur_window, button);
 		return state == GLFW_PRESS;
 	}
 
-	float WindowsInput::GetMouseXImpliment()
+	float Input::GetMouseX()
 	{
 		GLFWwindow* cur_window = static_cast<GLFWwindow*> (Application::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
@@ -41,7 +41,7 @@ namespace Rulomi {
 		return xpos;
 	}
 
-	float WindowsInput::GetMouseYImpliment()
+	float Input::GetMouseY()
 	{
 		GLFWwindow* cur_window = static_cast<GLFWwindow*> (Application::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
@@ -49,7 +49,7 @@ namespace Rulomi {
 		return ypos;
 	}
 
-	std::pair<float, float> WindowsInput::GetMousePositionImpliment()
+	std::pair<float, float> Input::GetMousePosition()
 	{
 		GLFWwindow* cur_window = static_cast<GLFWwindow*> (Application::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;

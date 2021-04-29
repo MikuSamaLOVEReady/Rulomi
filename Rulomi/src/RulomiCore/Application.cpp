@@ -17,22 +17,23 @@ namespace Rulomi {
 	 Application* Application::s_Instance = nullptr;
 
 	//初始化整个引擎
-	Application::Application()
+	Application::Application(const std::string& name)
 	
 	{
 		//RLM_ASSERT(!s_Instance, "Can only has one app");
 		s_Instance = this;
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = std::unique_ptr<Window>(Window::Create(WindowProps(name)));
 
 		//参数为处理响应用的函数   即当窗口 callback的时候 调用 OnEvent 函数
 		// 这个是给 windowdata 设置callback 函数 
 		m_Window->SetEventCallback(  std::bind(&Application::OnEvent, this, std::placeholders::_1) ); 
 
+		//初始化渲染器
+		Renderer::Init();
+
+		//自带一层UI控制layer
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
-
-	
-
 	}
 
 	Application::~Application()
@@ -47,16 +48,20 @@ namespace Rulomi {
 		dispatcher.Dispatch<WindowCloseEvent>( std::bind(&Application::OnWindowClose, this, std::placeholders::_1) );
 		RLM_CORE_INFO("{0}", e);
 
-
 		//被处理window 有关的dispatcher 处理完过后 还将交给layer再处理以边
 		for (auto iterator_end = m_LayerStack.end(); iterator_end != m_LayerStack.begin(); ) 
 		{
-			//函数回调，将事件优先丢给 overlayer  这个处理是每个layer 自己在做
-			(*--iterator_end)->OnEvent(e);
-			//一旦overlayer 有人处理则停止这个事件响应
+			//一旦overlayer 有人处理则停止这个事件响应 || 也可是鼠标划出viewport 阻塞消息传递
 			if (e.Handled)
 				break;
+			//函数回调，将事件优先丢给 overlayer  这个处理是每个layer 自己在做
+			(*--iterator_end)->OnEvent(e);
 		}
+	}
+
+	void Application::ShutDownEngine()
+	{
+		m_Running = false;
 	}
 
 	void Application::PushLayer(Layer* layer)
@@ -91,19 +96,18 @@ namespace Rulomi {
 
 	void Application::Run()
 	{
-		
+		//引擎主循环
 		while (m_Running)
 		{
 			//time interval 
 			float Currenttime = (float)glfwGetTime();
 			TimeInterval timeInterval = Currenttime - m_LastFrameTime;
 			m_LastFrameTime = Currenttime;
-
+			//刷新渲染内容
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate(timeInterval);
-
+			//遍历所有layers 并且刷新UI 
 			m_ImGuiLayer->Begin();
-			//遍历所有layers 并且刷新
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();

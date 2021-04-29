@@ -11,6 +11,11 @@ namespace Rulomi {
 	class RenderCommand
 	{
 	public:
+		inline static void init()
+		{
+			s_RendererAPI->init();
+		}
+
 		inline static void SetClearColor(const glm::vec4& color)
 		{
 			s_RendererAPI->SetClearColor(color);
@@ -18,6 +23,11 @@ namespace Rulomi {
 		inline static void Clear()
 		{
 			s_RendererAPI->Clear();
+		}
+
+		static void DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t count = 0)
+		{
+			s_RendererAPI->DrawIndexed(vertexArray, count);
 		}
 
 		//将 shader绘制命令传递给 具体的API处理

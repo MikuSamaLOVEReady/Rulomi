@@ -16,7 +16,8 @@ namespace Rulomi {
 	class  RULOMI_API Application
 	{
 	public: 
-		Application();
+		//设置default 名字
+		Application(const std::string& name = "Rulomi Engine");
 		//C++的base类为啥都需要被设置成virtual？
 		virtual ~Application();
 
@@ -28,9 +29,14 @@ namespace Rulomi {
 		void PushOverlay(Layer* layer);
 		void PopOverlay(Layer* layer);
 
+		void ShutDownEngine();
+
+
 		//获取当前引擎的单例 obj
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
+		//ToDo 不能直接这样获取
+		inline ImGuiLayer* GetImguiLayer() { return m_ImGuiLayer; }
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);

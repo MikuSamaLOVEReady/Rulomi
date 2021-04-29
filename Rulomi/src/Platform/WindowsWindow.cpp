@@ -10,6 +10,7 @@
 
 namespace Rulomi {
 
+
 	static bool s_GLFWInitalized = false;
 
 	static void GLFWErrorCallback(int error, const char* description)
@@ -172,6 +173,7 @@ namespace Rulomi {
 		
 	}
 
+	//设置帧率是否同步显示
 	void WindowsWindow::SetVSync(bool enabled)
 	{
 		//glfwSwapInterval 设置 当前buffer的 context的刷新间隔

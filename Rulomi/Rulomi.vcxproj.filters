@@ -1292,6 +1292,12 @@
     </ClInclude>
     <ClInclude Include="src\RulomiCore\MathEX\Math.h" />
     <ClInclude Include="src\Renderer\EditorCamera.h" />
+    <ClInclude Include="src\RulomiCore\Scene\SceneEnvironment.h" />
+    <ClInclude Include="src\Renderer\Material.h" />
+    <ClInclude Include="src\Renderer\Mesh.h" />
+    <ClInclude Include="src\RulomiCore\Buffer.h" />
+    <ClInclude Include="src\Renderer\ShaderUniform.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShaderUniform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1404,5 +1410,9 @@
     </ClCompile>
     <ClCompile Include="src\RulomiCore\MathEX\Math.cpp" />
     <ClCompile Include="src\Renderer\EditorCamera.cpp" />
+    <ClCompile Include="src\RulomiCore\Scene\SceneEnvironment.cpp" />
+    <ClCompile Include="src\Renderer\Material.cpp" />
+    <ClCompile Include="src\Renderer\Mesh.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShaderUniform.cpp" />
   </ItemGroup>
 </Project>

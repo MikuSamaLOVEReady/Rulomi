@@ -5,6 +5,14 @@
 
 namespace Rulomi {
 
+	enum class TextureFormat
+	{
+		None = 0,
+		RGB = 1,
+		RGBA = 2,
+		Float16 = 3
+	};
+
 	class Texture
 	{
 	public:
@@ -28,10 +36,17 @@ namespace Rulomi {
 	public:
 		static Reference<Texture2D> Create(const std::string& path);
 		static Reference<Texture2D> Create(uint32_t width, uint32_t height);
-
-
 	};
 
+	//Ìì¿ÕÇòÎÆÀí
+	class TextureCube : public Texture
+	{
+	public:
+		static Reference<TextureCube> Create(TextureFormat format, uint32_t width, uint32_t height);
+		static Reference<TextureCube> Create(const std::string& path);
+
+		//virtual const std::string& GetPath() const = 0;
+	};
 
 
 

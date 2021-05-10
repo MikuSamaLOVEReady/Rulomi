@@ -35,6 +35,21 @@ namespace Rulomi {
 
 
 
+	Reference<TextureCube> TextureCube::Create(TextureFormat format, uint32_t width, uint32_t height)
+	{
+		return Reference<TextureCube>();
+	}
+
+	Reference<TextureCube> TextureCube::Create(const std::string& path)
+	{
+		switch (RendererAPI::GetAPI())
+		{
+		case  RendererAPI::API::None: return nullptr;
+		case  RendererAPI::API::OpenGL: return CreateRef<OpenGLTextureCube>(path);
+		}
+		return nullptr;
+	}
+
 }
 
 

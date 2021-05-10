@@ -53,7 +53,7 @@ namespace Rulomi {
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			}
-			//attach the texture to framebuffer GL_COLOR_ATTACHMENT0 ====这个表明了 shader中 
+			//attach the texture to framebuffer GL_COLOR_ATTACHMENT0 ====这个表明了 shader中第几个output
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index, TextureTarget(multisampled), id, 0);
 		}
 

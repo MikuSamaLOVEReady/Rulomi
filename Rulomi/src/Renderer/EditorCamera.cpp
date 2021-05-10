@@ -27,9 +27,7 @@ namespace Rulomi {
 			glm::vec2 delta = (mouse - m_InitialMousePosition) * 0.005f;
 			m_InitialMousePosition = mouse;
 			//中间键 Delete
-			if (Input::IsMouseButtonPressed(RLM_MOUSE_BUTTON_MIDDLE))
-				MousePan(delta); //暂时无作用
-			else if (Input::IsMouseButtonPressed(RLM_MOUSE_BUTTON_LEFT))
+			if (Input::IsMouseButtonPressed(RLM_MOUSE_BUTTON_LEFT))
 				MouseRotate(delta);
 			else if (Input::IsMouseButtonPressed(RLM_MOUSE_BUTTON_RIGHT))
 				MouseZoom(delta.y);
@@ -51,10 +49,7 @@ namespace Rulomi {
 		return false;
 	}
 
-	void EditorCamera::MousePan(const glm::vec2& delta)
-	{
-	   //delete
-	}
+
 
 	//观察者相机 只能左右旋转
 	void EditorCamera::MouseRotate(const glm::vec2& delta)

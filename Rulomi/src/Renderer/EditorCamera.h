@@ -39,7 +39,6 @@ namespace Rulomi {
 
 		glm::vec3 CalculatePosition() const;
 
-		void MousePan(const glm::vec2& delta);
 		void MouseRotate(const glm::vec2& delta);
 		void MouseZoom(float delta);
 		float ZoomSpeed() const;

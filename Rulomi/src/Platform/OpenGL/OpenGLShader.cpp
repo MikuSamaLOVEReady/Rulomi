@@ -218,7 +218,7 @@ namespace Rulomi {
 			// -1 spans len characters (or until the end of the string, whichever comes first).
 			//这个函数有问题屮
 			shaderSources[ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos) );
-			RLM_CORE_ERROR("AASDAS");
+
 		}
 
 		return shaderSources;

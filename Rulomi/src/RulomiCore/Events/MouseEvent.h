@@ -54,9 +54,7 @@ namespace Rulomi {
 
 	};
 
-
-
-   // mouse Press & release
+   // mouse Press & release 	//同上
 	class RULOMI_API MouseButtonEvent : public Event
 	{
 	public:
@@ -69,7 +67,6 @@ namespace Rulomi {
 			:m_Button(button){}
 		int m_Button;
 	};
-
 	class RULOMI_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
@@ -85,8 +82,6 @@ namespace Rulomi {
 		}
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
-
-	//同上
 	class RULOMI_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:

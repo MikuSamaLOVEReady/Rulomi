@@ -20,11 +20,14 @@ namespace Rulomi {
 		static void BeginScene(OrthographicCamera& camera);
 		static void BeginScene(Camera& camera, glm::mat4& transform);
 		//submit 需要知道当前绑定哪个shader 
+		// 对应 mesh  materially 与 transform
 		static void Submit(const std::shared_ptr<Shader>& shader,
 			const std::shared_ptr<VertexArray>& vertexArray, 
 			const glm::mat4& transform = glm::mat4(1.0f) );
 		static void EndScene();
-		
+
+		//绘制3D obj
+		//static void SubmitMesh(const Reference<Mesh>& mesh, const glm::mat4& transform, const Reference<MaterialInstance>& overrideMaterial = nullptr);
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:

@@ -140,6 +140,19 @@ namespace Rulomi {
 		Renderer2D::EndScene();
 	}
 
+	void Scene::SetEnvironment(const Environment& environment)
+	{
+		m_Environment = environment;
+		SetSkybox(environment.RadianceMap);
+	}
+
+	void Scene::SetSkybox(const Reference<TextureCube>& skybox)
+	{
+		m_SkyboxTexture = skybox;
+		//TODO:材质！系统！
+		//m_SkyboxMaterial->Set("u_Texture", skybox);
+	}
+
 	//全部 非FixAspecRatio的都需要更新 矩阵
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
 	{
@@ -155,8 +168,8 @@ namespace Rulomi {
 				Camera.camera.SetViewportSize(m_viewport_width, m_viewport_height);
 			}
 		}
-
 	}
+	
 
 	Entity Scene::GetMainCamera()
 	{
@@ -169,6 +182,8 @@ namespace Rulomi {
 		}
 		return {};
 	}
+
+
 
 	template<typename T>
 	void Scene::OnComponentAdded(Entity entity, T& component)

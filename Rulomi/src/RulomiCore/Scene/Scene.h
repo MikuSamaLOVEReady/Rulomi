@@ -2,13 +2,13 @@
 #include "entt.hpp"
 #include  "RulomiCore/Core/Timeinternal.h"
 #include "Renderer/EditorCamera.h"
+#include "SceneEnvironment.h"
 
 
 namespace Rulomi {
 	
 	//前向声明 
 	class Entity;
-
 	class Scene
 	{
 	public:
@@ -23,6 +23,9 @@ namespace Rulomi {
 		void OnUpdate(TimeInterval ts);
 		void OnUpdateEditor(TimeInterval ts, EditorCamera& camera);
 
+		//天空球
+		void SetEnvironment(const Environment& environment);
+		void SetSkybox(const Reference<TextureCube>& skybox);
 
 		void OnViewportResize(uint32_t width, uint32_t height);
 
@@ -40,6 +43,11 @@ namespace Rulomi {
 		friend class SceneHierarchyPanel;
 		friend class SceneSerializar;
 		uint32_t m_viewport_width = 0.0f , m_viewport_height = 0.0f;
+
+		Environment m_Environment;
+		Reference<TextureCube> m_SkyboxTexture;
+		//Reference<MaterialInstance> m_SkyboxMaterial;
+
 	};
 
 

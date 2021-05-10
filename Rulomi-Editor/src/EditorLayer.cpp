@@ -155,6 +155,7 @@ namespace Rulomi {
 		////sampler2D 是一种采样器 需要赋值的是 这个sampler 想要采样的纹理所绑定的槽位
 		//std::dynamic_pointer_cast<OpenGLShader>(textureshader)->UploadUniformInt("u_Texture", 0);
 	}
+	static float dlt = 0.0f;
 
 	void EditorLayer::OnAttach()
 	{
@@ -181,11 +182,29 @@ namespace Rulomi {
 
 		m_SquareEntity = square;
 
+		
+
+
+
 		main_cam = m_Scene->CreateEntity("Camera A");
 		main_cam.AddComponent<CameraComponent>();
 
 		second_cam = m_Scene->CreateEntity("Camera B");
 		auto& cc = second_cam.AddComponent<CameraComponent>();*/
+
+		/*
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				//绘制
+				Rulomi::Renderer::Submit(m_Shader, m_VertexArray,transform);
+			}
+		}
+		*/
+
  
 
 		class CameraController : public ScriptableEntity
@@ -229,7 +248,7 @@ namespace Rulomi {
 
 	void EditorLayer::OnUpdate(TimeInterval deltTime)
 	{
-
+		dlt = deltTime.getTimeMilliseconds();
 		//当 viewport resize的时候 //与之前不同 这个viewport变化过后 是同时刷新所有摄像机
 		if (FramebufferSpecification spec = m_FrameBuffer->GetSpecification();
 			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
@@ -248,8 +267,6 @@ namespace Rulomi {
 			m_orthographicCameraControler.OnUpdate(deltTime);
 		m_EditorCamera.OnUpdate(deltTime);
 		
-
-
 		Renderer2D::ResetStats();
 		// 开始为FrameBuffer 填充内容但 显示放在 imgui
 		m_FrameBuffer->Bind();
@@ -313,6 +330,7 @@ namespace Rulomi {
 
 		if (opt_fullscreen)
 			ImGui::PopStyleVar(2);
+
 		//设置dockspace的属性
 		ImGuiIO& io = ImGui::GetIO();
 		ImGuiStyle& style = ImGui::GetStyle();
@@ -355,10 +373,6 @@ namespace Rulomi {
 				{
 					NewScene();
 				}
-
-					
-				//if (ImGui::MenuItem("Close", NULL, false, p_open != NULL))
-					//*p_open = false;
 				ImGui::EndMenu();
 			}
 			ImGui::EndMenuBar();
@@ -370,10 +384,11 @@ namespace Rulomi {
 
 		auto stats = Renderer2D::GetStats();
 		ImGui::Text("Renderer2D Stats:");
-		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-		ImGui::Text("Quads: %d", stats.QuadCount);
-		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
-		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
+		ImGui::Text("Draw Calls (render task): %d", stats.DrawCalls);
+		//ImGui::Text("Quads: %d", stats.QuadCount);
+		ImGui::Text("Vertices number: %d", stats.GetTotalVertexCount());
+		ImGui::Text("Indices number: %d", stats.GetTotalIndexCount());
+		ImGui::Text("Delta Time: %f", dlt);
 
 		ImGui::End();
 
@@ -427,11 +442,14 @@ namespace Rulomi {
 				//SetDrawlist表示在当前window中绘制
 				ImGuizmo::SetDrawlist();
 
-				//设置view-port （x,y表示窗口起始位置) 后俩参数表示窗口大小
 				float windowWidth = (float)ImGui::GetWindowWidth();
 				float windowHeight = (float)ImGui::GetWindowHeight();
-				//ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
-				ImGuizmo::SetRect(m_ViewportBounds[0].x, m_ViewportBounds[0].y, m_ViewportBounds[1].x - m_ViewportBounds[0].x, m_ViewportBounds[1].y - m_ViewportBounds[0].y);
+
+				//设置view-port （x,y表示窗口起始位置) 后俩参数表示窗口大小
+				ImGuizmo::SetRect(m_ViewportBounds[0].x,
+					m_ViewportBounds[0].y, 
+					m_ViewportBounds[1].x - m_ViewportBounds[0].x, 
+					m_ViewportBounds[1].y - m_ViewportBounds[0].y);
 
 				//<<Run time>>Camera  gizmo 出现的位置 相机+物体自身来决定  (V P 俩个矩阵)
 				//Entity mainCame = m_Scene->GetMainCamera();
@@ -448,7 +466,10 @@ namespace Rulomi {
 				glm::mat4  entTransformMtx = EntTransComp.GetTransformMtx();
 
 				//draw call
-				ImGuizmo::Manipulate(glm::value_ptr(cameraView),glm::value_ptr(cameraProjection), (ImGuizmo::OPERATION)m_GizmoType,ImGuizmo::LOCAL,glm::value_ptr(entTransformMtx));
+				ImGuizmo::Manipulate(glm::value_ptr(cameraView),
+					glm::value_ptr(cameraProjection),
+					(ImGuizmo::OPERATION)m_GizmoType,
+					ImGuizmo::LOCAL,glm::value_ptr(entTransformMtx) );
 
 				//移动和跳转gizmo的时候
 				if (ImGuizmo::IsUsing())

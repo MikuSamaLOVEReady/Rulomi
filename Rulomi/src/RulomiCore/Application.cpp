@@ -16,7 +16,7 @@ namespace Rulomi {
 
 	 Application* Application::s_Instance = nullptr;
 
-	//³õÊ¼»¯Õû¸öÒıÇæ
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	Application::Application(const std::string& name)
 	
 	{
@@ -24,14 +24,14 @@ namespace Rulomi {
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create(WindowProps(name)));
 
-		//²ÎÊıÎª´¦ÀíÏìÓ¦ÓÃµÄº¯Êı   ¼´µ±´°¿Ú callbackµÄÊ±ºò µ÷ÓÃ OnEvent º¯Êı
-		// Õâ¸öÊÇ¸ø windowdata ÉèÖÃcallback º¯Êı 
+		//ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ÃµÄºï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ callbackï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ OnEvent ï¿½ï¿½ï¿½ï¿½
+		// ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ windowdata ï¿½ï¿½ï¿½ï¿½callback ï¿½ï¿½ï¿½ï¿½ 
 		m_Window->SetEventCallback(  std::bind(&Application::OnEvent, this, std::placeholders::_1) ); 
 
-		//³õÊ¼»¯äÖÈ¾Æ÷
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½
 		Renderer::Init();
 
-		//×Ô´øÒ»²ãUI¿ØÖÆlayer
+		//ï¿½Ô´ï¿½Ò»ï¿½ï¿½UIï¿½ï¿½ï¿½ï¿½layer
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
@@ -42,19 +42,19 @@ namespace Rulomi {
 
 	void Application::OnEvent(Event& e)
 	{
-		//¹¹ÔìµÄÊ±ºò m_Event ÀàĞÍÒ²±»³õÊ¼»¯
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ m_Event ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
 		EventDispatcher dispatcher(e);
-		// ÕâÀïÅĞ¶Ï ·¢³öµÄÊÂ¼şÀàĞÍÊÇ·ñ Óë .Dispatch<T> ÖĞT£¨ÎÒÃÇÏëÒª¼ì²âµÄÀàĞÍÒ»ÖÂ£©
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ .Dispatch<T> ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Â£ï¿½
 		dispatcher.Dispatch<WindowCloseEvent>( std::bind(&Application::OnWindowClose, this, std::placeholders::_1) );
 		RLM_CORE_INFO("{0}", e);
 
-		//±»´¦Àíwindow ÓĞ¹ØµÄdispatcher ´¦ÀíÍê¹ıºó »¹½«½»¸ølayerÔÙ´¦ÀíÒÔ±ß
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½window ï¿½Ğ¹Øµï¿½dispatcher ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½layerï¿½Ù´ï¿½ï¿½ï¿½ï¿½Ô±ï¿½
 		for (auto iterator_end = m_LayerStack.end(); iterator_end != m_LayerStack.begin(); ) 
 		{
-			//Ò»µ©overlayer ÓĞÈË´¦ÀíÔòÍ£Ö¹Õâ¸öÊÂ¼şÏìÓ¦ || Ò²¿ÉÊÇÊó±ê»®³öviewport ×èÈûÏûÏ¢´«µİ
+			//Ò»ï¿½ï¿½overlayer ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ó¦ || Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê»®ï¿½ï¿½viewport ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 			if (e.Handled)
 				break;
-			//º¯Êı»Øµ÷£¬½«ÊÂ¼şÓÅÏÈ¶ª¸ø overlayer  Õâ¸ö´¦ÀíÊÇÃ¿¸ölayer ×Ô¼ºÔÚ×ö
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½ overlayer  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½layer ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½
 			(*--iterator_end)->OnEvent(e);
 		}
 	}
@@ -89,24 +89,24 @@ namespace Rulomi {
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)
 	{
-		//Í£Ö¹ÒıÇæÖ÷Ñ­»·
+		//Í£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 		m_Running = false;
 		return true;
 	}
 
 	void Application::Run()
 	{
-		//ÒıÇæÖ÷Ñ­»·
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 		while (m_Running)
 		{
 			//time interval 
 			float Currenttime = (float)glfwGetTime();
 			TimeInterval timeInterval = Currenttime - m_LastFrameTime;
 			m_LastFrameTime = Currenttime;
-			//Ë¢ĞÂäÖÈ¾ÄÚÈİ
+			//Ë¢ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate(timeInterval);
-			//±éÀúËùÓĞlayers ²¢ÇÒË¢ĞÂUI 
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½layers ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½UI 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();

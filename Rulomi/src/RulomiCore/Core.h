@@ -32,13 +32,13 @@
 
 
 
-// << in other words left shifting an integer “x” with an integer “y” denoted as ‘(x<<y)’ 
-//  1<<   1 << 1 等于 00000001 << 1 等于 00000010 等于十进制 2
-//  2 << 1 等于 00000010 << 1 等于 00000100 等于十进制 4
+// << in other words left shifting an integer 锟斤拷x锟斤拷 with an integer 锟斤拷y锟斤拷 denoted as 锟斤拷(x<<y)锟斤拷 
+//  1<<   1 << 1 锟斤拷锟斤拷 00000001 << 1 锟斤拷锟斤拷 00000010 锟斤拷锟斤拷十锟斤拷锟斤拷 2
+//  2 << 1 锟斤拷锟斤拷 00000010 << 1 锟斤拷锟斤拷 00000100 锟斤拷锟斤拷十锟斤拷锟斤拷 4
 #define BITMove(x)   (1<<x)
 
 
-// Imgui layer event响应事件
+// Imgui layer event锟斤拷应锟铰硷拷
 #define RLM_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) 
 
 
@@ -48,7 +48,7 @@ namespace Rulomi {
     using Reference = std::shared_ptr<T>;
 
     template <typename T, typename...Args>
-    //constexpr 可以在编译时计算其返回值的函数。
+    //constexpr 锟斤拷锟斤拷锟节憋拷锟斤拷时锟斤拷锟斤拷锟戒返锟斤拷值锟侥猴拷锟斤拷锟斤拷
     constexpr Reference<T> CreateRef(Args&& ... args)
     {
         return std::make_shared<T>(std::forward<Args>(args)...);
@@ -65,4 +65,5 @@ namespace Rulomi {
 
 
 
+}
 }

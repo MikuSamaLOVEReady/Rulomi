@@ -8,8 +8,8 @@
 
 class Exmplayer :public Rulomi::Layer {
 public:
-	//ÕâÀïÉèÖÃµÄËÄ¸öÔªËØÊÇ Ïà»úµÄÊôÐÔ ¶ø·ÇÎ»ÖÃ
-	//³õÊ¼»¯ ±àÒëshader
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ä¸ï¿½Ôªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½shader
 	Exmplayer()
 		:Layer("MikuSama"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPostion(1.0f)
 	{
@@ -20,17 +20,17 @@ public:
 			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
-		// ´´½¨Ò»¸ö¿çÆ½Ì¨µÄ VertexBuffer creteÖÐ×Ô¶¯ÅÐ¶¨
+		// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æ½Ì¨ï¿½ï¿½ VertexBuffer creteï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ð¶ï¿½
 		m_VertexBuffer.reset(Rulomi::VertexBuffer::Create(vertices, sizeof(vertices)));
 
-		//ÔÚ´´½¨buffer layoutµÄÊ±ºò ¾ÍÈ·¶¨ offset ºÍ layout
+		//ï¿½Ú´ï¿½ï¿½ï¿½buffer layoutï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½È·ï¿½ï¿½ offset ï¿½ï¿½ layout
 		Rulomi::BufferLayout layout = {
 			{Rulomi::ShaderDataType::Float3, "a_Position" },
 			{Rulomi::ShaderDataType::Float4, "a_Color" }
 		};
-		//Ã¿¸öVB Ö»ÄÜÍ¬Ê±º¬ÓÐÒ»¸ö layout
+		//Ã¿ï¿½ï¿½VB Ö»ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ layout
 		m_VertexBuffer->SetLayout(layout);
-		//ÐèÒª¸ù¾ÝlayoutÉèÖÃ shaderÊôÐÔ
+		//ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½layoutï¿½ï¿½ï¿½ï¿½ shaderï¿½ï¿½ï¿½ï¿½
 		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 		
@@ -72,12 +72,12 @@ public:
 							a_Color = vec4(u_Color, 1.0);
 					}
               )";
-		//ÕâÖÖÃ»ÓÐµ¥¶ÀÎÄ¼þ´¦ÀíµÄ²¿·Ö Ôò»¹ÊÇ±£ÁôÖ®Ç°
+		//ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½Ö®Ç°
 	//	m_Shader.reset( Rulomi::Shader::Create(vertexSouce, fragmentSouce));
 		m_Shader = Rulomi::Shader::Create("trangle_shader", vertexSouce, fragmentSouce);
 		m_CashedShader.Add(m_Shader);
 
-		//ÎÆÀí²âÊÔ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		m_SquareVA.reset(Rulomi::VertexArray::Create());
 
 		float squareVertices[5 * 4] = {
@@ -100,13 +100,13 @@ public:
 		squareIB.reset(Rulomi::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
-		//frambuffer ³õÊ¼»¯
+		//frambuffer ï¿½ï¿½Ê¼ï¿½ï¿½
 		Rulomi::FramebufferSpecification FbSpecifiation;
 		FbSpecifiation.Width = 1280;
 		FbSpecifiation.Height = 720;
 		m_FrameBuffer = Rulomi::Framebuffer::Create(FbSpecifiation);
 
-		// ÕâÐ©creat ¶¼·Ö×°µ½ shader librayÖÐÁË
+		// ï¿½ï¿½Ð©creat ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½ shader librayï¿½ï¿½ï¿½ï¿½
 		//m_TextureShader.reset(Rulomi::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 		//m_TextureShader.reset(Rulomi::Shader::Create("assets/shaders/Texture.glsl"));
 		//m_TextureShader = Rulomi::Shader::Create();
@@ -115,7 +115,7 @@ public:
 
 		m_Texture2D = Rulomi::Texture2D::Create("assets/textures/12.jpg");
 		std::dynamic_pointer_cast<Rulomi::OpenGLShader>(textureshader)->Bind();
-		//sampler2D ÊÇÒ»ÖÖ²ÉÑùÆ÷ ÐèÒª¸³ÖµµÄÊÇ Õâ¸ösampler ÏëÒª²ÉÑùµÄÎÆÀíËù°ó¶¨µÄ²ÛÎ»
+		//sampler2D ï¿½ï¿½Ò»ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Òªï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½sampler ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¶¨µÄ²ï¿½Î»
 		std::dynamic_pointer_cast<Rulomi::OpenGLShader>(textureshader)->UploadUniformInt("u_Texture", 0);
 
 
@@ -125,8 +125,8 @@ public:
 	{
 
 		RLM_Client_INFO("{0}", deltTime.getTimeMilliseconds());
-		//µ±Ç°ÕâÐ©¸üÐÂ ÊÇ¸ù¾Ý µ±Ç°µÄÖ¡ÂÊÀ´¸úÐÂ
-		//Ó¦µ±ÉèÖÃÎª ¦¤Time
+		//ï¿½ï¿½Ç°ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª ï¿½ï¿½Time
 		if (Rulomi::Input::IsKeyPressed(RLM_KEY_LEFT))
 			m_CameraPostion.x -= m_CameraMoveSpeed*deltTime;
 		else if (Rulomi::Input::IsKeyPressed(RLM_KEY_RIGHT))
@@ -144,25 +144,25 @@ public:
 
 		//event polling
 		if (Rulomi::Input::IsKeyPressed(RLM_KEY_BACKSPACE))
-			RLM_Client_INFO("RLM_KEY_BACKSPACE £¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡");
+			RLM_Client_INFO("RLM_KEY_BACKSPACE ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
 
-		// ¿ªÊ¼ÎªFrameBuffer Ìî³äÄÚÈÝµ« ÏÔÊ¾·ÅÔÚ imgui
+		// ï¿½ï¿½Ê¼ÎªFrameBuffer ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ imgui
 		m_FrameBuffer->Bind();
 
 		Rulomi::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Rulomi::RenderCommand::Clear();
-		//³õÊ¼»¯Ïà»úÎ»ÖÃ
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 		m_Camera.SetPosition(m_CameraPostion);
 		m_Camera.SetRotation(m_CameraRotationDegree);
 
 
-		//äÖÈ¾Æ÷È«³éÏó
-		//Ïê¼û Render classÉè¼Æ
+		//ï¿½ï¿½È¾ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ Render classï¿½ï¿½ï¿½
 		Rulomi::Renderer::BeginScene(m_Camera);
 
-		//ÉèÖÃÃ¿¸öobjµÄ transform matix ÈÃËûÃÇ½øÈëÊÀ½ç×ø±ê
-		//·ÅËõµ½0.1±¶
+		//ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½objï¿½ï¿½ transform matix ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0.1ï¿½ï¿½
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 		std::dynamic_pointer_cast<Rulomi::OpenGLShader>(m_Shader)->Bind();
@@ -174,16 +174,16 @@ public:
 			{
 				glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				//»æÖÆ 
+				//ï¿½ï¿½ï¿½ï¿½ 
 				Rulomi::Renderer::Submit(m_Shader, m_VertexArray,transform);
 			}
 		}
 
-		//shder ¹ÜÀíÀà
+		//shder ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		auto textureshader = m_CashedShader.GetShaderByName("Texture");
 		m_Texture2D->Bind();
 		Rulomi::Renderer::Submit(textureshader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-		//¿ÉÒÔ°ó¶¨¶àÌ×shader ºÍ VA
+		//ï¿½ï¿½ï¿½Ô°ó¶¨¶ï¿½ï¿½ï¿½shader ï¿½ï¿½ VA
 		Rulomi::Renderer::EndScene();
 
 		m_FrameBuffer->UnBind();
@@ -197,11 +197,11 @@ public:
 	virtual void OnImGuiRender() override
 	{
 
-		//³õÊ¼»¯ docking space
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ docking space
 		static bool Dockspace_open = true;
 		static bool opt_fullscreen = true;
  	
-		//static bool opt_padding = false;	//Õâ¸öÊÇ¸ÉÉ¶
+		//static bool opt_padding = false;	//ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½É¶
 		static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
 		// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
@@ -242,7 +242,7 @@ public:
 		if (opt_fullscreen)
 			ImGui::PopStyleVar(2);
 
-		// DockSpace  ÄÚÈÝÌî³ä£¿
+		// DockSpace  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä£¿
 		ImGuiIO& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
 		{
@@ -251,7 +251,7 @@ public:
 		}
 		if (ImGui::BeginMenuBar())
 		{
-			//Ð¡Ñ¡Ïî
+			//Ð¡Ñ¡ï¿½ï¿½
 			if (ImGui::BeginMenu("Options"))
 			{
 				// Disabling fullscreen would allow the window to be moved to the front of other windows,
@@ -281,7 +281,7 @@ public:
 				ImGui::ColorEdit3("Square Color", glm::value_ptr(m_Color));
 				ImGui::Text("Renderer2D Stats:");
 
-				//¶ÁÈ¡frame buffer ÖÐµÄcolor Texture²¿·Ö
+				//ï¿½ï¿½È¡frame buffer ï¿½Ðµï¿½color Textureï¿½ï¿½ï¿½ï¿½
 				uint32_t textureID = m_FrameBuffer->GetColorTextureAttachmentRendererID();
 				ImGui::Image( (void*)textureID, ImVec2{ 1280, 720 });
 
@@ -294,13 +294,13 @@ public:
 	}
 
 private:
-	//Èý½ÇÐÎ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	std::shared_ptr<Rulomi::Shader> m_Shader;
 	std::shared_ptr<Rulomi::VertexBuffer> m_VertexBuffer;
 	std::shared_ptr<Rulomi::IndexBuffer> m_IndexBuffer;
 	std::shared_ptr<Rulomi::VertexArray> m_VertexArray;
 	
-	//ÎÆÀí¾ØÐÎ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	std::shared_ptr<Rulomi::Shader> m_FlatColorShader;
 	std::shared_ptr<Rulomi::VertexArray> m_SquareVA;
 	Rulomi::Reference<Rulomi::Texture2D> m_Texture2D;
@@ -308,10 +308,10 @@ private:
 	//Framebuffer 
 	Rulomi::Reference <Rulomi::Framebuffer> m_FrameBuffer;
 
-	//shader »º´æ
+	//shader ï¿½ï¿½ï¿½ï¿½
 	Rulomi::ShaderLibrary m_CashedShader;
 
-	//ÉãÏñ»úÏµÍ³
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³
 	Rulomi::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPostion;
 	float m_CameraMoveSpeed = 1.0f;
@@ -340,7 +340,7 @@ public:
 
 };
 
-//ÒýÇæÄÚ²¿µÄº¯ÊýµÄÉêÃ÷ ÓÉÓÎÏ·¶ÔÏó¶¨Òå
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 Rulomi::Application* Rulomi::CreateApplication()
 {
 	return new Sandbox();

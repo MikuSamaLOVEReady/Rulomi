@@ -12,13 +12,13 @@
 
 namespace Rulomi {
 
-	//application ÒıÇæÖ÷ÌåÖ»ÄÜÊÇÒ»¸öµ¥¼şsiglten
+	//application ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½siglten
 	class  RULOMI_API Application
 	{
 	public: 
-		//ÉèÖÃdefault Ãû×Ö
+		//ï¿½ï¿½ï¿½ï¿½default ï¿½ï¿½ï¿½ï¿½
 		Application(const std::string& name = "Rulomi Engine");
-		//C++µÄbaseÀàÎªÉ¶¶¼ĞèÒª±»ÉèÖÃ³Évirtual£¿
+		//C++ï¿½ï¿½baseï¿½ï¿½ÎªÉ¶ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ã³ï¿½virtualï¿½ï¿½
 		virtual ~Application();
 
 		void Run();
@@ -32,15 +32,15 @@ namespace Rulomi {
 		void ShutDownEngine();
 
 
-		//»ñÈ¡µ±Ç°ÒıÇæµÄµ¥Àı obj
+		//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ obj
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
-		//ToDo ²»ÄÜÖ±½ÓÕâÑù»ñÈ¡
+		//ToDo ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡
 		inline ImGuiLayer* GetImguiLayer() { return m_ImGuiLayer; }
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-		//Õâ¸öunique windowÊÇÖ¸Ïòµ±Ç°Ñ¡ÖĞ windowµÄÖ¸Õë  µ«Õû¸öwindow ¿ÉÄÜ²»ÊÇÓÉGLFWÊµÏÖµÄ¿ÉÄÜ»ìÔÓ±ğµÄÀàĞÍ
+		//ï¿½ï¿½ï¿½unique windowï¿½ï¿½Ö¸ï¿½ï¿½Ç°Ñ¡ï¿½ï¿½ windowï¿½ï¿½Ö¸ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½window ï¿½ï¿½ï¿½Ü²ï¿½ï¿½ï¿½ï¿½ï¿½GLFWÊµï¿½ÖµÄ¿ï¿½ï¿½Ü»ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
@@ -54,7 +54,7 @@ namespace Rulomi {
 
 	};
 
-	// Õâ¸öº¯ÊıĞèÒªÔÚclient¶Ë Ò²¾ÍÊÇÓÎÏ·¶ËÊµÏÖ¡£ Ö»ÊÇÔÚÒıÇæÖĞÉêÃ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½clientï¿½ï¿½ Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Êµï¿½Ö¡ï¿½ Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	Application* CreateApplication();
 
 

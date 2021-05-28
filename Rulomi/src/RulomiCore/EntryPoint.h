@@ -1,11 +1,11 @@
 #pragma once
 
 #ifdef  RLM_PLATFORM_WINDOWS
-//ÉêÃ÷Ò»¸öÍâ²¿µÄº¯Êı£¬ÈÃcompilerÔÚÍâ²¿Ñ°ÕÒÕâ¸öº¯ÊıµÄ¶¨Òå
+//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½â²¿ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½compilerï¿½ï¿½ï¿½â²¿Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
 extern Rulomi::Application* Rulomi::CreateApplication();
 
 
-//Ö»ĞŞ¸Ähead file ÎªÉ¶²»ÓÃÖØĞ´Éú³Édll£¿
+//Ö»ï¿½Ş¸ï¿½head file ÎªÉ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½dllï¿½ï¿½
 int main(int argc, char** argv) {
 
 	//Log system init

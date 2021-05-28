@@ -78,7 +78,7 @@ namespace Rulomi {
 		float distance = m_Distance * 0.3f;
 		distance = std::max(distance, 0.0f);
 		float speed = distance * distance;
-		speed = std::min(speed, 100.0f); // max speed = 100
+		speed = std::min(speed, 100.0f); 
 
 		return speed;
 	}

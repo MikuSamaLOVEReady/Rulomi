@@ -383,7 +383,7 @@ namespace Rulomi {
 		ImGui::Begin("Stats");
 
 		auto stats = Renderer2D::GetStats();
-		ImGui::Text("Renderer2D Stats:");
+		ImGui::Text("Stats:");
 		ImGui::Text("Draw Calls (render task): %d", stats.DrawCalls);
 		//ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices number: %d", stats.GetTotalVertexCount());
